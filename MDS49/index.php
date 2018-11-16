@@ -17,5 +17,6 @@ switch ($uc) {
 	case 'identifier':
 	{include ("controleurs/c_Identifier.php");;
 		break;}
+	}
 ?>
 

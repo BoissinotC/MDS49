@@ -23,6 +23,6 @@
         </ul>
         </li>
         <li class="stage"><a href="stage.html">Stage</a></li> 
-        <li class="identification"><a href="identification.html">S'identifier</a></li>     
+        <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li>     
         </ul>
 </nav>
