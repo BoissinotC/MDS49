@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <li class="accueil"><a href="accueil.html">Accueil</a>
+        <li class="accueil"><a href="index.php">Accueil</a>
         </li>
         <li class="information"><a href="information.html">Information</a>
         <ul class="submenu">
@@ -23,6 +23,6 @@
         </ul>
         </li>
         <li class="stage"><a href="stage.html">Stage</a></li> 
-        <li class="identification"><a href="identification.html">S'identifier</a></li>     
+        <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li>     
         </ul>
 </nav>

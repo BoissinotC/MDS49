@@ -1,29 +1,68 @@
 <?php 
 
 $action = $_REQUEST['action'];
-switch ($action) {
+
+switch($action) {
 	case 'seConnecter':{
 
+    include("vues/v_login.php");
+
+    }
+	
 		
-		include("vues/v_connecter.php");
-		break;
-	}
-	case 'confirmConnecter :'{
+	
+	case 'confirmConnecter ':{
 	//requête pour vérifier si l'utilisateur est déjà dans la base de données
 
-	// si il y est le connecter
+        // Check if the user is already logged in, if yes then redirect him to welcome page
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: index.php");
+    exit;
+    }
+ 
+    // Define variables and initialize with empty values
+        $username = $password = "";
+        $username_err = $password_err = "";
+ 
+        // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Check if username is empty
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter username.";
+    } else{
+        $username = trim($_POST["username"]);
+    }
+    
+    // Check if password is empty
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter your password.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validate credentials
+            
+    $connecter=$pdo->seConnecter($username,$password);
+        // Close statement
+        unset($stmt);
+        }
+    
+        // Close connection
+        unset($pdo);
+        
 
-	//sinon message erreur (non inscrit ou mot de passe erronné)
+        break;
 
 	}
 
-	case 'Inscrire :'{
+	case 'Inscrire ':{
 
 		include("vues/v_inscrire.php");
 
 	}
 
-	case 'confirmerInscrire'{
+	case 'confirmerInscrire' :{
 		//test des erreurs
 
 		//insertion dans la base de données
