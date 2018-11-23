@@ -12,10 +12,18 @@ else
 $pdo = pdoMDS49::getPdoMDS49();
 switch ($uc) {
 	case 'accueil':
-	{include ("controleurs/c_voirStage.php");
+	{
 		 break;}
 	case 'identifier':
-	{include ("controleurs/c_Identifier.php");;
-		break;}
+	{
+		include ("controleurs/c_Identifier.php");
+		break;
+	}
+	case 'stage':
+	{
+		include ("controleurs/c_Stage.php");
+		break;
+	}
+}
 ?>
 
