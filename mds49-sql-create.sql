@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS INTERVENANT
 
 INSERT INTO `INTERVENANT` (`IDINTERVENANT`, `NOMINTERVENANT`, `PRENOMINTERVENANT`, `DIPLOME`, `COUTHORAIRE`, `ROLESABIC`) VALUES
 (1, 'Kou', 'Jean-Claude',  'BAC ES', '10.00', 'A'),
-(2, 'Kante', 'Raphael', 'BAC S', '9.00', 'B'),
+(2, 'Kante', 'Raphael', 'BAC S', '0.00', 'B'),
 (3, 'Fiche', 'Tyson', 'BAC ES', '11.00', 'I'),
 (4, 'De Colo', 'Louis', 'BAC L', '12.00', 'A'),
 (5, 'Dupont', 'Pierre', 'BAC S', '10.00', 'A');
