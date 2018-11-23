@@ -542,6 +542,15 @@ CREATE TABLE IF NOT EXISTS TALENT
  ) 
  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ INSERT INTO `talent`(`IDSPE`, `IDINTERVENANT`) VALUES 
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(4,5);
+
+
+
 # -----------------------------------------------------------------------------
 #       INDEX DE LA TABLE TALENT
 # -----------------------------------------------------------------------------
@@ -696,4 +705,3 @@ ALTER TABLE JUGER
 ALTER TABLE JUGER 
   ADD FOREIGN KEY FK_JUGER_JURY (IDJURY)
       REFERENCES JURY (IDJURY) ;
-
