@@ -578,7 +578,7 @@ CREATE TABLE IF NOT EXISTS JUGER
 -- Déchargement des données de la table `juger`
 --
 
-INSERT INTO `juger` (`IDINTERVENANT`, `IDJURY`) VALUES
+INSERT INTO `JUGER` (`IDINTERVENANT`, `IDJURY`) VALUES
 (1, 2),
 (2, 1),
 (3, 4),
