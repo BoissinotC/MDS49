@@ -104,6 +104,51 @@ class PdoMDS49
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+	
+	public function insertionDonnees($nom,$prenom,$dateNaissance,$sexe,$adresse,$ville,$telephone,$email,$etudesSuivies,$disciplineSport,$clubLicencie,$adresseClub,$sessionDepart,$membreBureau,$membreEquipeTech,$animationJeune,$detailAnimationJeune,$organisationClub,$fonctionOrganisateurClub,$motivationsInscription,$nomTuteur,$prenomTuteur,$formationTuteur,$adresseTuteur,$mailTuteur)
+	{
+		$idClubSaisiFormulaire = "select IDCLUB Where NOMCLUB='$clubLicencie'";		
+		$idClubSaisi = PdoMDS49::$monPdoMDS49->query($idClubSaisiFormulaire);
+
+		$insertionExpe = "insert into expeassos (MEMBRECOMITEDIRECTEUR, MEMBREEQUIPETECH, FAIREANIMJEUNE, DETAILSOUIANIM, PARTICIPEORGACLUB, DETAILSORGACLUB) values('$membreBureau', '$membreEquipeTech', '$animationJeune', '$detailAnimationJeune', '$organisationClub', '$fonctionOrganisateurClub') ";		
+		$insertonExperience = PdoMDS49::$monPdoMDS49->exec($insertionExpe);
+
+		$idExpe = "select IDEXPE FROM expeassos Where MEMBRECOMITEDIRECTEUR='$membreBureau'
+			AND MEMBREEQUIPETECH='$membreEquipeTech'
+			AND FAIREANIMJEUNE='$animationJeune'
+			AND DETAILSOUIANIM='$detailAnimationJeune'
+			AND PARTICIPEORGACLUB='$organisationClub'
+			AND DETAILSORGACLUB='$fonctionOrganisateurClub'";		
+		$idExperience = PdoMDS49::$monPdoMDS49->query($idExpe);
+
+		$idVilleEntree = "select IDVILLE FROM ville Where NOMVILLE='$ville'";		
+		$idVille = PdoMDS49::$monPdoMDS49->query($idVilleEntree);
+
+		$idTuteurChercher = "select IDTUTEUR FROM tuteur Where NOMTUTEUR='$nomTuteur'
+			AND PRENOMTUTEUR='$prenomTuteur'";	
+		$idTuteur = PdoMDS49::$monPdoMDS49->query($idTuteurChercher);
+
+		$insertionFinale = "insert into inscits (IDCLUB, IDEXPE, IDVILLE, IDTUTEUR, NOMINSCRIT, PRENOMINSCRIT, SEXE, ADRESSEINSCRIT, DATENAISSANCE, TELPERSO, MAILPERSO, ETUDES, SPORTPRATIQUE, MOTIVINSCRIPTION) values('$idClubSaisi', '$idExperience', '$idVille', '$idTuteur', '$nom', '$prenom', '$sexe', '$adresse', '$dateNaissance', '$telephone', '$email', '$etudesSuivies', '$disciplineSport', '$motivationsInscription') ";
+		$insertionFinaleExe = PdoMDS49::$monPdoMDS49->exec($insertionFinale);
+
+		/*$laLigne = $res->fetch();
+		$maxi = $laLigne['maxi'] ;
+		$maxi++;
+		$idCommande = $maxi;
+		
+		$date = date('Y/m/d');
+		$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
+		//echo $req."<br>";
+		$res = PdoMDS49::$monPdo->exec($req);
+		foreach($lesIdProduit as $unIdProduit)
+		{
+			$req = "insert into contenir values ('$idCommande','$unIdProduit')";
+			
+			$res = PdoMDS49::$monPdo->exec($req);
+		}
+		*/
+	
+	}
 /**
  * Crée une commande 
  *
