@@ -6,7 +6,7 @@ switch($action) {
 	case 'seConnecter':{
 
     include("vues/v_login.php");
-
+    break;
     }
 	
 		
@@ -17,12 +17,13 @@ switch($action) {
         // Check if the user is already logged in, if yes then redirect him to welcome page
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
-    exit;
     }
  
     // Define variables and initialize with empty values
-        $username = $password = "";
-        $username_err = $password_err = "";
+        $username = "";
+        $password = "";
+        $username_err = "";
+        $password_err = "";
  
         // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -50,8 +51,6 @@ switch($action) {
     
         // Close connection
         unset($pdo);
-        
-
         break;
 
 	}
