@@ -134,9 +134,9 @@ class PdoMDS49
 
 
 	public function seConnecter ($username,$password) {
-		 if((!empty($username)) && (!empty($password))){
+		 if((!empty($username) and (!empty($password)){
         // Prepare a select statement
-        	$sql = "SELECT compte.IDINSCRIT, MAILPERSO, MDPMD5 FROM users INNER JOIN inscrit ON compte.IDINSCRIT = inscrits.IDINSCRIT WHERE MAILPERSO = :username";
+        	$sql = "SELECT 'compte.IDINSCRIT', 'MAILPERSO', 'MDPMD5' FROM compte INNER JOIN inscrits ON 'compte.IDINSCRIT' = 'inscrits.IDINSCRIT' WHERE 'MAILPERSO' = :username";
         
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
