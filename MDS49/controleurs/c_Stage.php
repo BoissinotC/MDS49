@@ -9,7 +9,6 @@ switch($action)
 	}
 	case 'confirmerStage':
 	{
-		
 		break;
 	}
 }
