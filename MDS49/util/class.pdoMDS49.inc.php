@@ -28,7 +28,8 @@ class PdoMDS49
     		PdoMDS49::$monPdo = new PDO(PdoMDS49::$serveur.';'.PdoMDS49::$bdd, PdoMDS49::$user, PdoMDS49::$mdp); 
 			PdoMDS49::$monPdo->query("SET CHARACTER SET utf8");
 	}
-	public function _destruct(){
+	public function _destruct()
+	{
 		PdoMDS49::$monPdo = null;
 	}
 /**
@@ -95,6 +96,14 @@ class PdoMDS49
 		}
 		return $lesProduits;
 	}
+
+	public function getLesBenevoles()
+	{
+		$req="select * from intervenant where rolesabic = 'B' ";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
 /**
  * Crée une commande 
  *
@@ -133,58 +142,61 @@ class PdoMDS49
 	}
 
 
-	public function seConnecter ($username,$password) {
-		 if((!empty($username) and (!empty($password)){
+	public function seConnecter ($username,$password) 
+	{
+		if( ( !empty($username)) && (!empty($password)) )
+		{
         // Prepare a select statement
-        	$sql = "SELECT 'compte.IDINSCRIT', 'MAILPERSO', 'MDPMD5' FROM compte INNER JOIN inscrits ON 'compte.IDINSCRIT' = 'inscrits.IDINSCRIT' WHERE 'MAILPERSO' = :username";
-        
-        if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+        	$sql = ("SELECT compte.IDINSCRIT, MAILPERSO, MDPMD5 FROM compte INNER JOIN inscrits ON compte.IDINSCRIT = inscrits.IDINSCRIT WHERE MAILPERSO = :username") ;
             
-            // Set parameters
-            $param_username = trim($_POST["MAILPERSO"]);
-            
-             // Attempt to execute the prepared statement
-            if($stmt->execute()){
-                // Check if username exists, if yes then verify password
-                if($stmt->rowCount() == 1){
-                    if($row = $stmt->fetch()){
-                        $id = $row["id"];
-                        $username = $row["MAILPERSO"];
-                        $hashed_password = $row["MDPMD5"];
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
+	        if($stmt = $pdo->prepare($sql))
+	        {
+	            // Bind variables to the prepared statement as parameters
+	            $stmt->bindParam("username", $param_username, PDO::PARAM_STR);
+	            
+	           
+	            
+	             // Attempt to execute the prepared statement
+	            if($stmt->execute())
+	            {
+	                // Check if username exists, if yes then verify password
+	                if($stmt->rowCount() == 1)
+	                {
+	                    if($row = $stmt->fetch())
+	                    {
+	                        $id = $row["id"];
+	                        $username = $row["MAILPERSO"];
+	                        $hashed_password = $row["MDPMD5"];
+	                        if(password_verify($password, $hashed_password))
+	                        {
+	                            
                             
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["compte.IDINSCRIT"] = $id;
-                            $_SESSION["MAILPERSO"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: index.php");	
-			
+	                            // Store data in session variables
+	                            $_SESSION["loggedin"] = true;
+	                            $_SESSION["compte.IDINSCRIT"] = $id;
+	                            $_SESSION["MAILPERSO"] = $username;                            
+	                           
 
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-                        }
-                    }
-                } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
+	                            // Redirect user to welcome page
+	                            header("location: index.php");	
+								
+
+	                        } else{
+	                            // Display an error message if password is not valid
+	                            $password_err = "The password you entered was not valid.";
+	                        }
+	                    }
+	                } else{
+	                    // Display an error message if username doesn't exist
+	                    $username_err = "No account found with that username.";
+	                }
+	            } else{
+	                echo "Oops! Something went wrong. Please try again later.";
+	            }
+	        }
         
 				
-			}
-		
-
-}
-
+		}
+	}	
 }
 ?>
