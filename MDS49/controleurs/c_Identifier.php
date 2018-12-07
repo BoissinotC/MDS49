@@ -4,6 +4,7 @@ $action = $_REQUEST['action'];
 
 switch($action) {
 	case 'seConnecter':{
+ 
 
     include("vues/v_login.php");
     break;
@@ -11,49 +12,61 @@ switch($action) {
 	
 		
 	
-	case 'confirmConnecter ':{
+	case 'confirmConnecter':{
 	//requête pour vérifier si l'utilisateur est déjà dans la base de données
 
         // Check if the user is already logged in, if yes then redirect him to welcome page
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
-    }
- 
+    
+ }
     // Define variables and initialize with empty values
-        $username = "";
-        $password = "";
-        $username_err = "";
-        $password_err = "";
- 
+
         // Processing form data when form is submitted
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
+   else {
+    $username_err="";
+    $password_err="";
+
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
+    if(empty(trim($_REQUEST["username"]))){
         $username_err = "Please enter username.";
     } else{
-        $username = trim($_POST["username"]);
+        $username = trim($_REQUEST["username"]);
+        
     }
     
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
+    if(empty(trim($_REQUEST["password"]))){
         $password_err = "Please enter your password.";
     } else{
-        $password = trim($_POST["password"]);
+        $password = trim($_REQUEST["password"]);
+        
     }
     
     // Validate credentials
             
-    $connecter=$pdo->seConnecter($username,$password);
+    if($password_err != "" || $username_err != "") 
+            {
+                header("index.php?uc=identifier&action=seConnecter");
+            }
+            else
+            {
+                $pdo->seConnecter($username,$password);
+            }
         // Close statement
         unset($stmt);
-        }
-    
-        // Close connection
-        unset($pdo);
+        
+    }
         break;
 
 	}
+
+    case 'seDeconnecter':{
+        session_destroy();  
+
+        header('Location: index.php?uc=identifer&action=seConnecter');
+    }
 
 	case 'Inscrire ':{
 
