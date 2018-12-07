@@ -304,7 +304,7 @@ CREATE TABLE IF NOT EXISTS COMPTE
  ) 
  ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
- INSERT INTO COMPTE VALUES ('BastienCoulum@gamil.com','please');
+ INSERT INTO COMPTE VALUES ('BastienCoulum@gmail.com','please');
 
 
  # -----------------------------------------------------------------------------
