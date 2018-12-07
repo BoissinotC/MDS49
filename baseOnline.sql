@@ -525,8 +525,8 @@ CREATE TABLE IF NOT EXISTS INSCRITS
 --
 
 INSERT INTO `INSCRITS` (`IDINSCRIT`, `IDCLUB`, `IDEXPE`,`IDVILLE`, `IDTUTEUR`, `NOMINSCRIT`, `PRENOMINSCRIT`, `SEXE`, `ADRESSEINSCRIT`, `DATENAISSANCE`, `TELPERSO`, `MAILPERSO`, `ETUDES`, `SPORTPRATIQUE`, `MOTIVINSCRIPTION`) VALUES
-(1, 1, 1,1, 1, 'Elhacoumo', 'Bastien', 'G', 'Avenue de la Lune', '1994-12-12', '0605040302', 'BastienCoulum@gmail.com', 'BAC S', 'Equitation', 'Passioné par le sport'),
-(2, 2, 2,2, 2, 'Goulet', 'Hubert', 'G', 'Avenue du Papa', '1980-01-01', '0604080907', 'GouletHubert@gmail.com', 'BAC S', 'Golf', 'Passion pour le sport individuel'),
+(1, 1, 1,1, 1, 'Elhacoumo', 'Bastien', 'H', 'Avenue de la Lune', '1994-12-12', '0605040302', 'BastienCoulum@gmail.com', 'BAC S', 'Equitation', 'Passioné par le sport'),
+(2, 2, 2,2, 2, 'Goulet', 'Hubert', 'H', 'Avenue du Papa', '1980-01-01', '0604080907', 'GouletHubert@gmail.com', 'BAC S', 'Golf', 'Passion pour le sport individuel'),
 (3, 3, 3,3, 3, 'Melissandre', 'Jouet', 'F', 'Avenue du Tigre', '1990-11-01', '0606985907', 'MelissandreJouet@gmail.com', 'BAC ES', 'Natation', 'Passion pour les sports d\'eau'),
 (4, 4, 3,4, 4, 'Pelouse', 'René', 'H', '6 rue des jardiniers', '2000-06-16', '0658764169', 'çapoussemal@gmail.com', 'Médecine', 'GYMNASTIQUE', 'Pour le travail'),
 (5, 3, 2,2, 2, 'Paraskeva', 'Brenda', 'F', '6 rue des coquelicots', '1995-02-14', '0645987456', 'brendaparaskeva@gmail.com', 'Arts', 'EQUITATION', 'Trouver un copain');
