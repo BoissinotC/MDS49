@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /** 
  * Classe d'accès aux données. 
  
@@ -10,13 +10,12 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
 */
-
 class PdoMDS49
 {   		
-      	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=MDS49';   		
-      	private static $user='root' ;    		
-      	private static $mdp='' ;	
+      	private static $serveur='mysql:host=db672809222.db.1and1.com';
+      	private static $bdd='dbname=db672809222';   		
+      	private static $user='dbo672809222' ;    		
+      	private static $mdp='BMw1234*CEMP' ;	
 		private static $monPdo;
 		private static $monPdoMDS49 = null;
 /**
@@ -25,8 +24,14 @@ class PdoMDS49
  */				
 	private function __construct()
 	{
+		try {
     		PdoMDS49::$monPdo = new PDO(PdoMDS49::$serveur.';'.PdoMDS49::$bdd, PdoMDS49::$user, PdoMDS49::$mdp); 
 			PdoMDS49::$monPdo->query("SET CHARACTER SET utf8");
+		}
+		catch (PDOException $e){
+		echo $e->getMessage();
+		exit;
+		}
 	}
 	public function _destruct(){
 		PdoMDS49::$monPdo = null;
@@ -44,6 +49,47 @@ class PdoMDS49
 			PdoMDS49::$monPdoMDS49= new PdoMDS49();
 		}
 		return PdoMDS49::$monPdoMDS49;  
+	}
+/**
+ * Retourne toutes les catégories sous forme d'un tableau associatif
+ *
+ * @return le tableau associatif des catégories 
+*/
+	public function getLesAnimateurs()
+	{
+		$req = "select * from INTERVENANT WHERE ROLESABIC = 'A'";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+		public function getLesBenevoles()
+	{
+		$req="select * from INTERVENANT where ROLESABIC = 'B' ";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+	public function getLesHebergements()
+	{
+		$req = "SELECT LIEUHEBERGEMENT.`IDHEBERGEMENT`, LIEUHEBERGEMENT.`ADRESSEHEBER`, LIEUHEBERGEMENT.`CODEPOSTALHEBER`, LIEUHEBERGEMENT.`NOMHEBERGEMENT`, LIEUHEBERGEMENT.`COUTHEBER`, LIEUHEBERGEMENT.`CAPACITEHEBER`, VILLE.NOMVILLE FROM `LIEUHEBERGEMENT` INNER JOIN VILLE on LIEUHEBERGEMENT.IDVILLE = VILLE.IDVILLE";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+	
+	public function getLesStages()
+	{
+		$req = "select SESSION.IDSESSION, SESSION.DATEDEBUT, SESSION.DATEFIN, SESSION.IDSTAGE, LIEUHEBERGEMENT.NOMHEBERGEMENT from SESSION INNER JOIN LIEUHEBERGEMENT on SESSION.IDHEBERGEMENT = LIEUHEBERGEMENT.IDHEBERGEMENT";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+		public function getLesIntervenants()
+	{
+		$req = "select * from INTERVENANT ";
+		$res = PdoMDS49::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
 	}
 
 
@@ -78,24 +124,6 @@ class PdoMDS49
 		$insertionFinale = "insert into inscrits (IDCLUB, IDEXPE, IDVILLE, IDTUTEUR, NOMINSCRIT, PRENOMINSCRIT, SEXE, ADRESSEINSCRIT, DATENAISSANCE, TELPERSO, MAILPERSO, ETUDES, SPORTPRATIQUE, MOTIVINSCRIPTION) values('".$idClubSaisi['IDCLUB']."', '".$insertionFinaleExe['IDEXPE']."', '".$idVille['IDVILLE']."', '".$idTuteurtrouve['IDTUTEUR']."', '$nom', '$prenom', '$sexe', '$adresse', '$dateNaissance', '$telephone', '$email', '$etudesSuivies', '$disciplineSport', '$motivationsInscription') ";
 		$brutInsertionFinaleExe = PdoMDS49::$monPdo->exec($insertionFinale);
 	
-	}
-
-
-	public function getlesHebergements(){
-		$req = " select ADRESSEHEBER, CODEPOSTALHEBER, NOMHEBERGEMENT, COUTHEBER, CAPACITEHEBER,NOMVILLE FROM lieuhebergement INNER JOIN ville ON lieuhebergement.IDVILLE = ville.IDVILLE";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
-
-
-
-	public function getLesBenevoles()
-	{
-		$req="select * from intervenant where rolesabic = 'B' ";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
 	}
 
 
@@ -155,7 +183,6 @@ class PdoMDS49
 				
 		}
 	}	
-
 
 }
 ?>
