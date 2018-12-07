@@ -1,14 +1,14 @@
 <nav>
     <ul>
-        <li class="accueil"><a href="index.php">Accueil</a>
+        <li class="accueil"><a href="accueil.html">Accueil</a>
         </li>
         <li class="information"><a href="information.html">Information</a>
         <ul class="submenu">
-            <li><a href="#">Hébergements</a></li>
-            <li><a href="#">Intervenants</a></li>
-            <li><a href="#">Animateurs</a></li>
-            <li><a href="#">Bénévoles</a></li>
-            <li><a href="#">Stages</a></li>
+            <li><a href="index.php?uc=information&action=hebergements">Hébergements</a></li>
+            <li><a href="index.php?uc=information&action=intervenants">Intervenants</a></li>
+            <li><a href="index.php?uc=information&action=vAnimateur">Animateurs</a></li>
+            <li><a href="index.php?uc=information&action=benevoles">Bénévoles</a></li>
+            <li><a href="index.php?uc=information&action=stage">Stages</a></li>
         </ul>
         </li>
         <li class="gestion"><a href="gestion.html">Gestion</a>
@@ -23,6 +23,6 @@
         </ul>
         </li>
         <li class="stage"><a href="stage.html">Stage</a></li> 
-        <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li>     
+        <li class="identification"><a href="identification.html">S'identifier</a></li>     
         </ul>
 </nav>

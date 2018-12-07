@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /** 
  * Classe d'accès aux données. 
  
@@ -50,47 +50,13 @@ class PdoMDS49
  *
  * @return le tableau associatif des catégories 
 */
-	public function getLesAnimateurs()
+	public function getLesUtilisateurs()
 	{
-		$req = "select * from intervenant WHERE rolesabic = 'A'";
+		$req = "select * from categorie";
 		$res = PdoMDS49::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
-
-		public function getLesBenevoles()
-	{
-		$req="select * from intervenant where rolesabic = 'B' ";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
-
-	public function getLesHebergements()
-	{
-		$req = "SELECT lieuhebergement.`IDHEBERGEMENT`, lieuhebergement.`ADRESSEHEBER`, lieuhebergement.`CODEPOSTALHEBER`, lieuhebergement.`NOMHEBERGEMENT`, lieuhebergement.`COUTHEBER`, lieuhebergement.`CAPACITEHEBER`, ville.NOMVILLE FROM `lieuhebergement` INNER JOIN ville on lieuhebergement.IDVILLE = ville.IDVILLE";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
-	
-	public function getLesStages()
-	{
-		$req = "select session.IDSESSION, session.DATEDEBUT, session.DATEFIN, session.IDSTAGE, lieuhebergement.NOMHEBERGEMENT from session INNER JOIN lieuhebergement on session.IDHEBERGEMENT = lieuhebergement.IDHEBERGEMENT";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
-
-		public function getLesIntervenants()
-	{
-		$req = "select * from intervenant ";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
-
-
 
 /**
  * Retourne sous forme d'un tableau associatif tous les produits de la
@@ -163,8 +129,62 @@ class PdoMDS49
 			
 			$res = PdoMDS49::$monPdo->exec($req);
 		}
-		
-	
+
 	}
+
+
+	public function seConnecter ($username,$password) {
+		 if((!empty($username) and (!empty($password)){
+        // Prepare a select statement
+        	$sql = "SELECT 'compte.IDINSCRIT', 'MAILPERSO', 'MDPMD5' FROM compte INNER JOIN inscrits ON 'compte.IDINSCRIT' = 'inscrits.IDINSCRIT' WHERE 'MAILPERSO' = :username";
+        
+        if($stmt = $pdo->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+            
+            // Set parameters
+            $param_username = trim($_POST["MAILPERSO"]);
+            
+             // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // Check if username exists, if yes then verify password
+                if($stmt->rowCount() == 1){
+                    if($row = $stmt->fetch()){
+                        $id = $row["id"];
+                        $username = $row["MAILPERSO"];
+                        $hashed_password = $row["MDPMD5"];
+                        if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            session_start();
+                            
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["compte.IDINSCRIT"] = $id;
+                            $_SESSION["MAILPERSO"] = $username;                            
+                            
+                            // Redirect user to welcome page
+                            header("location: index.php");	
+			
+
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = "The password you entered was not valid.";
+                        }
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    $username_err = "No account found with that username.";
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        
+				
+			}
+		
+
+}
+
 }
 ?>

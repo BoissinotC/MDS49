@@ -20,22 +20,26 @@ switch($action) {
     }
  
     // Define variables and initialize with empty values
-    
+        $username = "";
+        $password = "";
+        $username_err = "";
+        $password_err = "";
+ 
         // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_REQUEST["username"]))){
+    if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
-        $username = trim($_REQUEST["username"]);
+        $username = trim($_POST["username"]);
     }
     
     // Check if password is empty
-    if(empty(trim($_REQUEST["password"]))){
+    if(empty(trim($_POST["password"]))){
         $password_err = "Please enter your password.";
     } else{
-        $password = trim($_REQUEST["password"]);
+        $password = trim($_POST["password"]);
     }
     
     // Validate credentials
