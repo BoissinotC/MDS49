@@ -69,17 +69,25 @@ switch($action) {
         header('Location: index.php');
     }
 
-	case 'Inscrire':{
+	case 'inscrire':{
 
-		include("vues/v_inscrire.php");
+        include("vues/v_inscrire.php");
+        break;
+    }
 
-	}
+    case 'confirmerInscrire' :{
+        //test des erreurs
+        // Le message
+        $message = "Line 1\r\nLine 2\r\nLine 3";
 
-	case 'confirmerInscrire' :{
-		//test des erreurs
+        // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
+        $message = wordwrap($message, 70, "\r\n");
 
-		//insertion dans la base de données
-	}
+        // Envoi du mail
+        mail('rousselp@saintemarie-cholet.eu', 'Mon Sujet', $message);
+        //insertion dans la base de données
+        break;
+    }
 }
 
 
