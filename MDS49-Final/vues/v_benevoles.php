@@ -1,5 +1,6 @@
+<form action="index.php?uc=information&action=benevoles" method=post>
 
-        <p><H1>Liste des benevoles</H1><br>
+<p><H1>Liste des benevoles</H1><br>
 
         <table border=3 cellspacing=1 >
             <tr>
@@ -31,3 +32,4 @@
         ?>
         </table>
         </br>
+    </form>
