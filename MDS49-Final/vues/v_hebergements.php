@@ -1,5 +1,5 @@
-    <form action="index.php?uc=information&action=hebergements" method="post">
-        <p><H1>Liste des Hebergements</H1><br>
+<form action="index.php?uc=information&action=hebergements" method=post>
+<p><H1>Liste des Hebergements</H1><br>
 
         <table border=3 cellspacing=1 >
             <tr>
@@ -35,5 +35,4 @@
         ?>
         </table>
         </br>
-
     </form>
