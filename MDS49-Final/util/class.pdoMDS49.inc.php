@@ -97,7 +97,7 @@ class PdoMDS49
 		{
         // Prepare a select statement
 			//$passhash = md5($password);
-        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM compte  WHERE MAILCOMPTE = :MAILCOMPTE") ;
+        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM COMPTE  WHERE MAILCOMPTE = :MAILCOMPTE") ;
             
 	        if($stmt = PdoMDS49::$monPdo->prepare($sql))
 	        {
