@@ -15,7 +15,7 @@
         { ?>
         <li class="gestion"><a>Gestion</a>
         <ul class="submenu">
-            <li><a href="#">Lieux d'hébergements</a></li>
+            <li><a href="index.php?uc=lieux&action=voirLieux">Lieux d'hébergements</a></li>
             <li><a href="index.php?uc=gestion&action=affecterIntervenant">Intervenants</a></li>
             <li><a href="index.php?uc=gestion&action=affecterAnimateur">Animateurs</a></li>
             <li><a href="index.php?uc=gestion&action=affecterBenevole">Bénévoles</a></li>
