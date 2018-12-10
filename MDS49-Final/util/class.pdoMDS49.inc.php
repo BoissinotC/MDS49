@@ -47,7 +47,7 @@ class PdoMDS49
 	}
 
  	public function getUnLieu($num){
-		$req = "select * from lieuhebergement inner join ville on lieuhebergement.IDVILLE = ville.IDVILLE where IDHEBERGEMENT= $num";
+		$req = "select * from LIEUHEBERGEMENT inner join ville on LIEUHEBERGEMENT.IDVILLE = VILLE.IDVILLE where IDHEBERGEMENT= $num";
 		$res = PdoMDS49::$monPdo->query($req);
 		$laligne = $res->fetch();
 		return $laligne;
@@ -57,7 +57,7 @@ class PdoMDS49
 
 
 	public function getLesVilles(){
-		$req="select IDVILLE,NOMVILLE FROM ville";
+		$req="select IDVILLE,NOMVILLE FROM VILLE";
 		$res = PdoMDS49::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -65,14 +65,14 @@ class PdoMDS49
 
 
 	public function creerLieuxHebergement($ville,$adresse,$codepostal,$nomHebergement,$cout,$capacite){
-		$req = "INSERT INTO `lieuhebergement`(`IDVILLE`, `ADRESSEHEBER`, `CODEPOSTALHEBER`, `NOMHEBERGEMENT`, `COUTHEBER`, `CAPACITEHEBER`) VALUES (
+		$req = "INSERT INTO `LIEUHEBERGEMENT`(`IDVILLE`, `ADRESSEHEBER`, `CODEPOSTALHEBER`, `NOMHEBERGEMENT`, `COUTHEBER`, `CAPACITEHEBER`) VALUES (
 		'$ville','$adresse','$codepostal','$nomHebergement','$cout','$capacite')";
 		$res = PdoMDS49::$monPdo->exec($req);
 
 	}
 
 	public function modifLieuxHebergement($num,$adresse,$codepostal,$nomHebergement,$cout,$capacite){
-		$res = PdoMDS49::$monPdo-> prepare ('UPDATE lieuhebergement SET ADRESSEHEBER = :ADRESSEHEBER, CODEPOSTALHEBER = :CODEPOSTALHEBER, NOMHEBERGEMENT = :NOMHEBERGEMENT, COUTHEBER = :COUTHEBER, CAPACITEHEBER = :CAPACITEHEBER WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
+		$res = PdoMDS49::$monPdo-> prepare ('UPDATE LIEUHEBERGEMENT SET ADRESSEHEBER = :ADRESSEHEBER, CODEPOSTALHEBER = :CODEPOSTALHEBER, NOMHEBERGEMENT = :NOMHEBERGEMENT, COUTHEBER = :COUTHEBER, CAPACITEHEBER = :CAPACITEHEBER WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
 		$res-> bindValue('IDHEBERGEMENT',$num);
 		$res-> bindValue('ADRESSEHEBER',$adresse,PDO::PARAM_STR);
 		$res-> bindValue('CODEPOSTALHEBER',$codepostal,PDO::PARAM_STR);
@@ -83,7 +83,7 @@ class PdoMDS49
 	}
 
 	public function supprLieu($num){
-		$res = PdoMDS49::$monPdo -> prepare ('DELETE FROM lieuhebergement WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
+		$res = PdoMDS49::$monPdo -> prepare ('DELETE FROM LIEUHEBERGEMENT WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
 		$res-> bindValue('IDHEBERGEMENT',$num);
 		$res-> execute();
 
