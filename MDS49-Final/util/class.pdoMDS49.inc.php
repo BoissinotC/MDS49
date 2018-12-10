@@ -297,5 +297,11 @@ class PdoMDS49
 		$brutInsertionFinaleExe = PdoMDS49::$monPdo->exec($insertionFinale);
 	
 	}
+	
+	public function nouveauCompte($email, $mdp)
+	{
+		$insertionCompte = "insert into COMPTE (MAILCOMPTE, MDPMD5) values('$email', '$mdp') ";		
+		$insererCompte = PdoMDS49::$monPdo->exec($insertionCompte);
+	}	
 }
 ?>
