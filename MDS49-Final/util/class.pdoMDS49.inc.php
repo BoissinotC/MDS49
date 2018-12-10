@@ -103,7 +103,7 @@ class PdoMDS49
 		{
         // Prepare a select statement
 			//$passhash = md5($password);
-        	$sql = ("SELECT compte.IDINSCRIT, MAILPERSO, MDPMD5 FROM compte INNER JOIN inscrits ON compte.IDINSCRIT = inscrits.IDINSCRIT WHERE MAILPERSO = :username") ;
+        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM compte  WHERE MAILCOMPTE = :username") ;
             
 	        if($stmt = PdoMDS49::$monPdo->prepare($sql))
 	        {
@@ -122,14 +122,13 @@ class PdoMDS49
 	                    if($row = $stmt->fetch())
 	                    {
 	                        $id = $row["id"];
-	                        $username = $row["MAILPERSO"];
+	                        $username = $row["MAILCOMPTE"];
 	                        //$hashed_password = $row["MDPMD5"];
 	                            
                             
 	                            // Store data in session variables
 	                            $_SESSION["loggedin"] = true;
-	                            $_SESSION["compte.IDINSCRIT"] = $id;
-	                            $_SESSION["MAILPERSO"] = $username;                            
+	                            $_SESSION["MAILCOMPTE"] = $username;                            
 	                           
 	                            // Redirect user to welcome page
 	                            header("location: index.php");	
