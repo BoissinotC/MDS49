@@ -97,12 +97,12 @@ class PdoMDS49
 		{
         // Prepare a select statement
 			//$passhash = md5($password);
-        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM compte  WHERE MAILCOMPTE = :username") ;
+        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM compte  WHERE MAILCOMPTE = :MAILCOMPTE") ;
             
 	        if($stmt = PdoMDS49::$monPdo->prepare($sql))
 	        {
 	            // Bind variables to the prepared statement as parameters
-	            $stmt->bindValue("username", $username, PDO::PARAM_STR);
+	            $stmt->bindValue("MAILCOMPTE", $username, PDO::PARAM_STR);
 	            //$stmt->bindValue("passhash", $passhash, PDO::PARAM_STR);
 	            
 	           
