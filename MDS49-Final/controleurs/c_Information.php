@@ -1,49 +1,36 @@
 <?php 
-
 $action = $_REQUEST['action'];
 switch ($action) {
-	case 'planningStage' :
+	case 'planningStage':
 	{	
 		include("vues/v_planning.php");
 		break;
 	}
-	case 'animateurs' :
+	case 'animateurs':
 	{
 		$lesAnimateurs = $pdo->getLesAnimateurs();
 		include("vues/v_animateur.php");
 		break;
 	}
-
 	case 'benevoles':{
-
 		$benevoles = $pdo->getLesBenevoles();
 			include ("vues/v_benevoles.php");
 			break;
 	}
-
-	case 'hebergements' :{
+	case 'hebergements':{
 		$lesHebergements = $pdo->getLesHebergements();
 		include("vues/v_hebergements.php");
 		break;
 	}
-
-	case 'stage' :{
-
+	case 'stages':{
 		$lesStages = $pdo->getLesStages();
 		include("vues/v_stage.php");
 		break;
 	}
-
-	case 'intervenants' :{
+	case 'intervenants':{
 		$lesIntervenants = $pdo->getLesIntervenants();
 		include("vues/v_intervenants.php");
 		break;
-
 	}
-
 }
-
-
-
-
 ?>
