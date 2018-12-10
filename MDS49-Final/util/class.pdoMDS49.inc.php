@@ -10,7 +10,6 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  *
 */
-
 class PdoMDS49
 {   		
       	private static $serveur='mysql:host=db672809222.db.1and1.com';
@@ -58,7 +57,6 @@ class PdoMDS49
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
-
 /**
  * Retourne sous forme d'un tableau associatif tous les produits de la
  * catégorie passée en argument
@@ -66,7 +64,6 @@ class PdoMDS49
  * @param $idCategorie 
  * @return un tableau associatif  
 */
-
 	public function getLesProduitsDeCategorie($idCategorie)
 	{
 	    $req="select * from produit where idCategorie = '$idCategorie'";
@@ -96,7 +93,6 @@ class PdoMDS49
 		}
 		return $lesProduits;
 	}
-
 /**
  * Crée une commande 
  *
@@ -131,16 +127,12 @@ class PdoMDS49
 			
 			$res = PdoMDS49::$monPdo->exec($req);
 		}
-
 	}
-
-
 	public function seConnecter ($username,$password) 
 	{
 		if( (!empty($username)) && !empty($password)) 
 		{
         // Prepare a select statement
-
 			//$passhash = md5($password);
         	$sql = ("SELECT compte.IDINSCRIT, MAILPERSO, MDPMD5 FROM compte INNER JOIN inscrits ON compte.IDINSCRIT = inscrits.IDINSCRIT WHERE MAILPERSO = :username") ;
             
@@ -163,7 +155,6 @@ class PdoMDS49
 	                        $id = $row["id"];
 	                        $username = $row["MAILPERSO"];
 	                        //$hashed_password = $row["MDPMD5"];
-
 	                            
                             
 	                            // Store data in session variables
@@ -171,12 +162,9 @@ class PdoMDS49
 	                            $_SESSION["compte.IDINSCRIT"] = $id;
 	                            $_SESSION["MAILPERSO"] = $username;                            
 	                           
-
 	                            // Redirect user to welcome page
 	                            header("location: index.php");	
 								
-
-
 	                    }
 	                } else{
 	                    // Display an error message if username doesn't exist
@@ -191,7 +179,6 @@ class PdoMDS49
 				
 		}
 	}
-
 	public function affectionIntervenant($idActivite, $idIntervenant)
 	{
 		$req = PdoMDS49::$monPdo->prepare("INSERT INTO FAIRE (idActivite, idIntervenant) VALUES (:VidActivite, :VidIntervenant)");
@@ -199,7 +186,6 @@ class PdoMDS49
 		$req->bindValue('VidIntervenant', $idIntervenant);
 		$req->execute();
 	}
-
 	public function getLesActivites() 
 	{
 		$req = "SELECT idActivite, libelleActivite, competenceRequise FROM ACTIVITE";
@@ -207,7 +193,6 @@ class PdoMDS49
 		$listeActivite = $res->fetchAll();
 		return $listeActivite;
 	}
-
 	public function getLesBenevoles() 
 	{
 		$req = "SELECT * FROM INTERVENANT WHERE ROLESABIC = 'B' OR ROLESABIC = 'C' ORDER BY IDINTERVENANT";
@@ -215,7 +200,6 @@ class PdoMDS49
 		$lesBenevoles = $res->fetchAll();
 		return $lesBenevoles;
 	}
-
 	public function getLesAnimateurs() 
 	{
 		$req = "SELECT * FROM INTERVENANT WHERE ROLESABIC = 'A' ORDER BY IDINTERVENANT";
@@ -223,7 +207,6 @@ class PdoMDS49
 		$lesAnimateurs = $res->fetchAll();
 		return $lesAnimateurs;
 	}
-
 	public function getLesIntervenants() 
 	{
 		$req = "SELECT * FROM INTERVENANT WHERE ROLESABIC = 'I' ORDER BY IDINTERVENANT";
@@ -231,16 +214,13 @@ class PdoMDS49
 		$lesIntervenants = $res->fetchAll();
 		return $lesIntervenants;
 	}
-
 	public function getLesInscrits() 
 	{
 		$req = "SELECT inscrits.IDINSCRIT, inscrits.NOMINSCRIT, inscrits.PRENOMINSCRIT, inscrits.TELPERSO, inscrits.MAILPERSO, inscrits.SPORTPRATIQUE, ville.NOMVILLE, club.NOMCLUB FROM inscrits INNER JOIN ville ON ville.idVille = inscrits.idVille INNER JOIN club ON club.idClub = inscrits.idClub ORDER BY inscrits.idInscrit";
-
 		$res = PdoMDS49::$monPdo->query($req);
 		$lesInscrits = $res->fetchAll();
 		return $lesInscrits;
 	}
-
 	public function choixInscritEval($inscrit, $valueEvalInscrit, $idJury)
 	{
 		$req = PdoMDS49::$monPdo->prepare("INSERT INTO evalution VALUES (:VidJury, :VidInscrit, :VresultEval)");
@@ -249,32 +229,28 @@ class PdoMDS49
 		$req->bindValue('VresultEval', $valueEvalInscrit);
 		$req->execute();
 	}
-
 	public function getLesHebergements()
 	{
-		$req = "SELECT lieuhebergement.`IDHEBERGEMENT`, lieuhebergement.`ADRESSEHEBER`, lieuhebergement.`CODEPOSTALHEBER`, lieuhebergement.`NOMHEBERGEMENT`, lieuhebergement.`COUTHEBER`, lieuhebergement.`CAPACITEHEBER`, ville.NOMVILLE FROM `lieuhebergement` INNER JOIN ville on lieuhebergement.IDVILLE = ville.IDVILLE";
+		$req = "SELECT LIEUHEBERGEMENT.`IDHEBERGEMENT`, LIEUHEBERGEMENT.`ADRESSEHEBER`, LIEUHEBERGEMENT.`CODEPOSTALHEBER`, LIEUHEBERGEMENT.`NOMHEBERGEMENT`, LIEUHEBERGEMENT.`COUTHEBER`, LIEUHEBERGEMENT.`CAPACITEHEBER`, VILLE.NOMVILLE FROM `LIEUHEBERGEMENT` INNER JOIN VILLE on LIEUHEBERGEMENT.IDVILLE = VILLE.IDVILLE";
 		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
+		$lesHebergements = $res->fetchAll();
+		return $lesHebergements;
 	}
 	
 	public function getLesStages()
 	{
-		$req = "select session.IDSESSION, session.DATEDEBUT, session.DATEFIN, session.IDSTAGE, lieuhebergement.NOMHEBERGEMENT from session INNER JOIN lieuhebergement on session.IDHEBERGEMENT = lieuhebergement.IDHEBERGEMENT";
+		$req = "SELECT 'SESSION'.'IDSESSION', 'SESSION'.'DATEDEBUT', 'SESSION'.'DATEFIN', 'SESSION'.'IDSTAGE', 'LIEUHEBERGEMENT'.'NOMHEBERGEMENT' FROM SESSION INNER JOIN LIEUHEBERGEMENT on 'SESSION'.'IDHEBERGEMENT' = 'LIEUHEBERGEMENT'.'IDHEBERGEMENT'";
 		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
+		$lesStages = $res->fetchAll();
+		return $lesStages;
 	}	
-
 	public function insertionDonnees($nom,$prenom,$dateNaissance,$sexe,$adresse,$ville,$telephone,$email,$etudesSuivies,$disciplineSport,$clubLicencie,$adresseClub,$sessionDepart,$membreBureau,$membreEquipeTech,$animationJeune,$detailAnimationJeune,$organisationClub,$fonctionOrganisateurClub,$motivationsInscription,$nomTuteur,$prenomTuteur,$formationTuteur,$adresseTuteur,$mailTuteur)
 	{
 		$idClubSaisiFormulaire = "SELECT IDCLUB FROM club Where NOMCLUB='$clubLicencie'";		
 		$brutIdClubSaisi = PdoMDS49::$monPdo->query($idClubSaisiFormulaire);
 		$idClubSaisi = $brutIdClubSaisi->fetch();
-
 		$insertionExpe = "insert into expeassos (MEMBRECOMITEDIRECTEUR, MEMBREEQUIPETECH, FAIREANIMJEUNE, DETAILSOUIANIM, PARTICIPEORGACLUB, DETAILSORGACLUB) values('$membreBureau', '$membreEquipeTech', '$animationJeune', '$detailAnimationJeune', '$organisationClub', '$fonctionOrganisateurClub') ";		
 		$insertonExperience = PdoMDS49::$monPdo->exec($insertionExpe);
-
 		$idExpe = "select IDEXPE FROM expeassos Where MEMBRECOMITEDIRECTEUR='$membreBureau'
 			AND MEMBREEQUIPETECH='$membreEquipeTech'
 			AND FAIREANIMJEUNE='$animationJeune'
@@ -283,16 +259,13 @@ class PdoMDS49
 			AND DETAILSORGACLUB='$fonctionOrganisateurClub' LIMIT 1";		
 		$brutIdExperience = PdoMDS49::$monPdo->query($idExpe);
 		$insertionFinaleExe = $brutIdExperience->fetch();
-
 		$idVilleEntree = "select IDVILLE FROM ville Where NOMVILLE='$ville'";		
 		$brutIdVille = PdoMDS49::$monPdo->query($idVilleEntree);
 		$idVille = $brutIdVille->fetch();
-
 		$idTuteurChercher = "select IDTUTEUR FROM tuteur Where NOMTUTEUR='$nomTuteur'
 			AND PRENOMTUTEUR='$prenomTuteur'";	
 		$brutResult_idTuteurChercher = PdoMDS49::$monPdo->query($idTuteurChercher);
 		$idTuteurtrouve = $brutResult_idTuteurChercher->fetch();
-
 		$insertionFinale = "insert into inscrits (IDCLUB, IDEXPE, IDVILLE, IDTUTEUR, NOMINSCRIT, PRENOMINSCRIT, SEXE, ADRESSEINSCRIT, DATENAISSANCE, TELPERSO, MAILPERSO, ETUDES, SPORTPRATIQUE, MOTIVINSCRIPTION) values('".$idClubSaisi['IDCLUB']."', '".$insertionFinaleExe['IDEXPE']."', '".$idVille['IDVILLE']."', '".$idTuteurtrouve['IDTUTEUR']."', '$nom', '$prenom', '$sexe', '$adresse', '$dateNaissance', '$telephone', '$email', '$etudesSuivies', '$disciplineSport', '$motivationsInscription') ";
 		$brutInsertionFinaleExe = PdoMDS49::$monPdo->exec($insertionFinale);
 	
