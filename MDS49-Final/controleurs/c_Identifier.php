@@ -75,7 +75,13 @@ switch($action) {
         break;
     }
 
-    case 'confirmerInscrire' :{
+     case 'confirmerInscrire' :{
+
+        $email=$_REQUEST['emailF'];
+        $mdp='BONSOIR';
+        $pdo->nouveauCompte($email, $mdp);
+
+
         //test des erreurs
         // Le message
         $message = "Line 1\r\nLine 2\r\nLine 3";
@@ -86,6 +92,9 @@ switch($action) {
         // Envoi du mail
         mail('rousselp@saintemarie-cholet.eu', 'Mon Sujet', $message);
         //insertion dans la base de données
+
+
+
         break;
     }
 }
