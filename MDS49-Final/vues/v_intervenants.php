@@ -1,3 +1,4 @@
+<form action="index.php?uc=information&action=intervenants" method=post>
 <p><H1>Liste des intervenants</H1><br>
 
         <table border=3 cellspacing=1 >
@@ -31,3 +32,4 @@
         ?>
         </table>
         </br>
+    </form>
