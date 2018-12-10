@@ -54,13 +54,7 @@ class PdoMDS49
 	}
 
 
-	public function getLesBenevoles()
-	{
-		$req="select * from intervenant where rolesabic = 'B' ";
-		$res = PdoMDS49::$monPdo->query($req);
-		$lesLignes = $res->fetchAll();
-		return $lesLignes;
-	}
+
 
 	public function getLesVilles(){
 		$req="select IDVILLE,NOMVILLE FROM ville";
