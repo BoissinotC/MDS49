@@ -26,7 +26,7 @@
 			$cout = $_REQUEST['TCout'];
 			$capacite = $_REQUEST['TCapacite'];
 			$pdo->creerLieuxHebergement($ville,$adresse,$codepostal,$nomHebergement,$cout,$capacite);
-			header('location:http://localhost/MDS49/index.php?uc=lieux&action=voirLieux');
+			header('location:http://gr03.sio-cholet.fr/index.php?uc=lieux&action=voirLieux');
 			break;
 
 
@@ -49,7 +49,7 @@
 			$cout = $_REQUEST['TCout'];
 			$capacite = $_REQUEST['TCapacite'];
 			$unLieu = $pdo->modifLieuxHebergement($num,$adresse,$codepostal,$nomHebergement,$cout,$capacite);
-			header('location:http://localhost/MDS49/index.php?uc=lieux&action=voirLieux');
+			header('location:http://gr03.sio-cholet.fr/index.php?uc=lieux&action=voirLieux');
 			break;
 
 		}
@@ -67,7 +67,7 @@
 		{
 			$num = $_REQUEST['num'];
 			$unLieu = $pdo -> supprLieu($num);
-			header('location:http://localhost/MDS49/index.php?uc=lieux&action=voirLieux');
+			header('location:http://gr03.sio-cholet.fr/index.php?uc=lieux&action=voirLieux');
 			break;
 		}
 	}
