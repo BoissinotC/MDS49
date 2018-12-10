@@ -47,7 +47,7 @@ class PdoMDS49
 	}
 
  	public function getUnLieu($num){
-		$req = "select * from LIEUHEBERGEMENT inner join ville on LIEUHEBERGEMENT.IDVILLE = VILLE.IDVILLE where IDHEBERGEMENT= $num";
+		$req = "select * from LIEUHEBERGEMENT inner join VILLE on LIEUHEBERGEMENT.IDVILLE = VILLE.IDVILLE where IDHEBERGEMENT= $num";
 		$res = PdoMDS49::$monPdo->query($req);
 		$laligne = $res->fetch();
 		return $laligne;
