@@ -1,4 +1,5 @@
-        <p><H1>Liste des Animateurs</H1><br>
+<form action="index.php?uc=information&action=animateurs" method=post>
+<p><H1>Liste des Animateurs</H1><br>
 
         <table border=3 cellspacing=1 >
             <tr>
@@ -31,3 +32,4 @@
         ?>
         </table>
         </br>
+    </form>
