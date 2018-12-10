@@ -48,6 +48,12 @@ switch ($uc) {
 		include ("controleurs/c_Stage.php");
 		break;
 	}
+	case 'lieux':
+	{
+		include ("controleurs/c_gestionLieux.php");
+		break;
+	}
+		
 }
 
 ?>
