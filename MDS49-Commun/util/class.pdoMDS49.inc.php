@@ -46,93 +46,58 @@ class PdoMDS49
 		}
 		return PdoMDS49::$monPdoMDS49;  
 	}
-/**
- * Retourne toutes les catégories sous forme d'un tableau associatif
- *
- * @return le tableau associatif des catégories 
-*/
-	public function getLesUtilisateurs()
+
+	public function getUnLieu($num){
+		$req = "select * from lieuhebergement inner join ville on lieuhebergement.IDVILLE = ville.IDVILLE where IDHEBERGEMENT= $num";
+		$res = PdoMDS49::$monPdo->query($req);
+		$laligne = $res->fetch();
+		return $laligne;
+	}
+
+
+	public function getLesBenevoles()
 	{
-		$req = "select * from categorie";
+		$req="select * from intervenant where rolesabic = 'B' ";
 		$res = PdoMDS49::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
 
-/**
- * Retourne sous forme d'un tableau associatif tous les produits de la
- * catégorie passée en argument
- * 
- * @param $idCategorie 
- * @return un tableau associatif  
-*/
-
-	public function getLesProduitsDeCategorie($idCategorie)
-	{
-	    $req="select * from produit where idCategorie = '$idCategorie'";
+	public function getLesVilles(){
+		$req="select IDVILLE,NOMVILLE FROM ville";
 		$res = PdoMDS49::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
-		return $lesLignes; 
-	}
-/**
- * Retourne les produits concernés par le tableau des idProduits passée en argument
- *
- * @param $desIdProduit tableau d'idProduits
- * @return un tableau associatif 
-*/
-	public function getLesProduitsDuTableau($desIdProduit)
-	{
-		$nbProduits = count($desIdProduit);
-		$lesProduits=array();
-		if($nbProduits != 0)
-		{
-			foreach($desIdProduit as $unIdProduit)
-			{
-				$req = "select * from produit where id = '$unIdProduit'";
-				$res = PdoMDS49::$monPdo->query($req);
-				$unProduit = $res->fetch();
-				$lesProduits[] = $unProduit;
-			}
-		}
-		return $lesProduits;
+		return $lesLignes;
 	}
 
-/**
- * Crée une commande 
- *
- * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
- * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
- * tableau d'idProduit passé en paramètre
- * @param $nom 
- * @param $rue
- * @param $cp
- * @param $ville
- * @param $mail
- * @param $lesIdProduit
- 
-*/
-	public function creerCommande($nom,$rue,$cp,$ville,$mail, $lesIdProduit )
-	{
-		$req = "select max(id) as maxi from commande";
-		
-		$res = PdoMDS49::$monPdo->query($req);
-		$laLigne = $res->fetch();
-		$maxi = $laLigne['maxi'] ;
-		$maxi++;
-		$idCommande = $maxi;
-		
-		$date = date('Y/m/d');
-		$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
-		//echo $req."<br>";
+
+	public function creerLieuxHebergement($ville,$adresse,$codepostal,$nomHebergement,$cout,$capacite){
+		$req = "INSERT INTO `lieuhebergement`(`IDVILLE`, `ADRESSEHEBER`, `CODEPOSTALHEBER`, `NOMHEBERGEMENT`, `COUTHEBER`, `CAPACITEHEBER`) VALUES (
+		'$ville','$adresse','$codepostal','$nomHebergement','$cout','$capacite')";
 		$res = PdoMDS49::$monPdo->exec($req);
-		foreach($lesIdProduit as $unIdProduit)
-		{
-			$req = "insert into contenir values ('$idCommande','$unIdProduit')";
-			
-			$res = PdoMDS49::$monPdo->exec($req);
-		}
 
 	}
+
+	public function modifLieuxHebergement($num,$adresse,$codepostal,$nomHebergement,$cout,$capacite){
+		$res = PdoMDS49::$monPdo-> prepare ('UPDATE lieuhebergement SET ADRESSEHEBER = :ADRESSEHEBER, CODEPOSTALHEBER = :CODEPOSTALHEBER, NOMHEBERGEMENT = :NOMHEBERGEMENT, COUTHEBER = :COUTHEBER, CAPACITEHEBER = :CAPACITEHEBER WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
+		$res-> bindValue('IDHEBERGEMENT',$num);
+		$res-> bindValue('ADRESSEHEBER',$adresse,PDO::PARAM_STR);
+		$res-> bindValue('CODEPOSTALHEBER',$codepostal,PDO::PARAM_STR);
+		$res-> bindValue('NOMHEBERGEMENT',$nomHebergement,PDO::PARAM_STR);
+		$res-> bindValue('COUTHEBER',$cout,PDO::PARAM_STR);
+		$res-> bindValue('CAPACITEHEBER',$capacite,PDO::PARAM_INT);
+		$res-> execute();
+	}
+
+	public function supprLieu($num){
+		$res = PdoMDS49::$monPdo -> prepare ('DELETE FROM lieuhebergement WHERE IDHEBERGEMENT = :IDHEBERGEMENT');
+		$res-> bindValue('IDHEBERGEMENT',$num);
+		$res-> execute();
+
+	}
+
+
+
 
 
 	public function seConnecter ($username,$password) 
@@ -142,7 +107,7 @@ class PdoMDS49
         // Prepare a select statement
 
 			//$passhash = md5($password);
-        	$sql = ("SELECT compte.IDINSCRIT, MAILPERSO, MDPMD5 FROM compte INNER JOIN inscrits ON compte.IDINSCRIT = inscrits.IDINSCRIT WHERE MAILPERSO = :username") ;
+        	$sql = ("SELECT MAILCOMPTE, MDPMD5 FROM compte  WHERE MAILCOMPTE = :username") ;
             
 	        if($stmt = PdoMDS49::$monPdo->prepare($sql))
 	        {
@@ -161,15 +126,14 @@ class PdoMDS49
 	                    if($row = $stmt->fetch())
 	                    {
 	                        $id = $row["id"];
-	                        $username = $row["MAILPERSO"];
+	                        $username = $row["MAILCOMPTE"];
 	                        //$hashed_password = $row["MDPMD5"];
 
 	                            
                             
 	                            // Store data in session variables
 	                            $_SESSION["loggedin"] = true;
-	                            $_SESSION["compte.IDINSCRIT"] = $id;
-	                            $_SESSION["MAILPERSO"] = $username;                            
+	                            $_SESSION["MAILCOMPTE"] = $username;                            
 	                           
 
 	                            // Redirect user to welcome page
