@@ -25,13 +25,14 @@
         </ul>
         </li>
         <?php } ?>
-        <li class="stage"><a href="stage.html">Stage</a></li> 
         <?php if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)
         { ?>
             <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li> <?php 
         } 
         else 
         { ?>
+
+            <li class="stage"><a href="index.php?uc=stage&action=demandeStage">Stage</a></li> 
             <li class="identification"><a href="index.php?uc=identifier&action=seDeconnecter">Deconnexion</a></li>
         <?php } ?>
 

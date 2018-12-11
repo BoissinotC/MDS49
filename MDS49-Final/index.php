@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("util/class.pdoMDS49.inc.php");
+require_once("util/fonction.php");
 include("vues/v_entete.php") ;
 include("vues/v_menuHorizontal.php");
 

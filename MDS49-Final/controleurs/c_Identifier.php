@@ -1,30 +1,26 @@
 <?php 
-
 $action = $_REQUEST['action'];
-
 switch($action) {
-	case 'seConnecter':{
+    case 'seConnecter':{
  
-
     include("vues/v_login.php");
     break;
     }
-	
-		
-	
-	case 'confirmConnecter':{
-	   //requête pour vérifier si l'utilisateur est déjà dans la base de données
-
+    
+        
+    
+    case 'confirmConnecter':{
+       //requête pour vérifier si l'utilisateur est déjà dans la base de données
         // Check if the user is already logged in, if yes then redirect him to welcome page
         if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
         {
-            header("location: index.php");
+            header("Location: http://gr03.sio-cholet.fr/index.php");
+            exit;
         }
         else 
         {
             $username_err="";
             $password_err="";
-
             // Check if username is empty
             if(empty(trim($_REQUEST["username"])))
             {
@@ -49,7 +45,8 @@ switch($action) {
             
             if($password_err != "" || $username_err != "") 
             {
-                header("index.php?uc=identifier&action=seConnecter");
+                header("Location: http://gr03.sio-cholet.fr/index.php?uc=identifier&action=seConnecter");
+                exit;
             }
             else
             {
@@ -61,45 +58,27 @@ switch($action) {
         
         }
         break;
-	}
-
+    }
     case 'seDeconnecter':{
         session_destroy();  
-
-        header('Location: index.php');
-	break;
+        header('Location: http://gr03.sio-cholet.fr/index.php');
+        exit;
+        break;
     }
-
-	case 'inscrire':{
-
+    case 'inscrire':{
         include("vues/v_inscrire.php");
         break;
     }
-
      case 'confirmerInscrire' :{
-
         $email=$_REQUEST['emailF'];
-        $mdp='BONSOIR';
+        $mdp=genererMdp();
+        echo "Un email vous a été envoyé dans votre boîte mail avec votre nouveau mot de passe.";
+
         $pdo->nouveauCompte($email, $mdp);
 
-
-        //test des erreurs
-        // Le message
-        $message = "Line 1\r\nLine 2\r\nLine 3";
-
-        // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
-        $message = wordwrap($message, 70, "\r\n");
-
-        // Envoi du mail
-        mail('rousselp@saintemarie-cholet.eu', 'Mon Sujet', $message);
-        //insertion dans la base de données
-
-
+        envoyerMail($email, $mdp);
 
         break;
     }
 }
-
-
-
 ?>

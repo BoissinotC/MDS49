@@ -35,14 +35,8 @@ switch($action)
 		$formationTuteurF=$_REQUEST['formationTuteur'];
 		$adresseTuteurF=$_REQUEST['adresseTuteur'];
 		$mailTuteurF=$_REQUEST['mailTuteur'];
-
 		$pdo->insertionDonnees($nomF,$prenomF,$dateNaissanceF,$sexeF,$adresseF,$villeF,$telephoneF,$emailF,$etudesSuiviesF,$disciplineSportF,$clubLicencieF,$adresseClubF,$sessionDepartF,$membreBureauF,$membreEquipeTechF,$animationJeuneF,$detailAnimationJeuneF,$organisationClubF,$fonctionOrganisateurClubF,$motivationsInscriptionF,$nomTuteurF,$prenomTuteurF,$formationTuteurF,$adresseTuteurF,$mailTuteurF);
 		break;
-
 	}
 }
-
-
 ?>
-
-

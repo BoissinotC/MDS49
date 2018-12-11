@@ -27,7 +27,7 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Vous n'avez pas encore de compte ? <a href="register.php">Inscrivez-vous</a>.</p>
+            <p>Vous n'avez pas encore de compte ? <a href="index.php?uc=identifier&action=inscrire">Inscrivez-vous</a>.</p>
         </form>
     </div>
 </body>

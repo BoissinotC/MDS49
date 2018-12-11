@@ -22,7 +22,7 @@ switch ($action) {
 		include("vues/v_hebergements.php");
 		break;
 	}
-	case 'stages':{
+	case 'stage':{
 		$lesStages = $pdo->getLesStages();
 		include("vues/v_stage.php");
 		break;

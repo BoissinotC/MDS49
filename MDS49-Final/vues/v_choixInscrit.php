@@ -1,4 +1,3 @@
-
 <form action="index.php?uc=gestion&action=evalStagiaire" method=post>
     <h2>Liste des stagiaire</h2>
     <div align="center">
@@ -22,4 +21,3 @@
         <input type="submit" name="Confirmer" value="Confirmer">
     </div>
 </form>
-

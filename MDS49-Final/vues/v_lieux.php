@@ -43,7 +43,6 @@
                 <td width=200><?php echo $cout ?></td>
                 <td width=150><?php echo $capaciteHebergement ?></td>
                 <?php 
-
                 ?>
 				<td width=30><a href=index.php?uc=lieux&action=modifLieux&num=<?php echo $num ?>><img src="images/modifier.gif" title="Modif"></a></td>
                 <td width=30><a href=index.php?uc=lieux&action=suppLieux&num=<?php echo $num ?>><img src="images/supp.png" title="Suppr"></a></td>

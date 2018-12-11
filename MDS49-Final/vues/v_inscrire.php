@@ -5,7 +5,11 @@
 
 <table width="500">
         <tbody>
-            <tr><td>E-mail : </td><td><input type="text" id="email" name="email" /></td></tr>
+            <tr><td>E-mail : </td><td><input type="text" id="emailF" name="emailF" /></td></tr>
         </tbody>
     </table>  
+    
+<input type="submit" value="Valider">
+
 </p>
+</form>

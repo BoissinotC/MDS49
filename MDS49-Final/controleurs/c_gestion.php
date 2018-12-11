@@ -9,7 +9,6 @@
 			include("vues/v_affecterB.php");
 			break;
 		}
-
 		case 'confirmAffectationB' : 
 		{
 			$idIntervenant = $_REQUEST['benevole'];
@@ -18,7 +17,6 @@
 			header('Location: index.php?uc=gestion&action=validAffec');
 			break;
 		}
-
 		case 'affecterAnimateur' :
 		{
 			$listeActivite = $pdo->getLesActivites();
@@ -26,7 +24,6 @@
 			include("vues/v_affecterA.php");
 			break;
 		}
-
 		case 'confirmAffectationA' : 
 		{
 			$idIntervenant = $_REQUEST['animateur'];
@@ -35,7 +32,6 @@
 			header('Location: index.php?uc=gestion&action=validAffec');
 			break;
 		}
-
 		case 'affecterIntervenant' :
 		{
 			$listeActivite = $pdo->getLesActivites();
@@ -43,7 +39,6 @@
 			include("vues/v_affecterI.php");
 			break;
 		}
-
 		case 'confirmAffectationI' : 
 		{
 			$idIntervenant = $_REQUEST['intervenant'];
@@ -52,20 +47,17 @@
 			header('Location: index.php?uc=gestion&action=validAffec');
 			break;
 		}
-
 		case 'validAffec' :
 		{
 			include("vues/v_affectInter.php");
 			break;
 		}
-
 		case 'choixInscrit' :
 		{
 			$lesInscrits = $pdo->getLesInscrits();
 			include("vues/v_choixInscrit.php");
 			break;
 		}
-
 		case 'evalStagiaire' : 
 		{
 			$idJury = $_REQUEST['valueJury'];
