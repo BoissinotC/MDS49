@@ -445,6 +445,7 @@ CREATE TABLE IF NOT EXISTS HORAIRE
    IDSESSION INTEGER NOT NULL  ,
    HEUREDEBUT TIME NOT NULL  ,
    HEUREFIN TIME NOT NULL  ,
+   JOURACTIVITE INTEGER NOT NULL , 
    PRIMARY KEY (IDACTIVITE,IDSESSION)  ,
    KEY horaire_activite (IDACTIVITE)  ,
    KEY horaire_session (IDSESSION)
@@ -455,13 +456,13 @@ CREATE TABLE IF NOT EXISTS HORAIRE
 -- Déchargement des données de la table `horaire`
 --
 
-INSERT INTO `HORAIRE` (`IDACTIVITE`, `IDSESSION`, `HEUREDEBUT`, `HEUREFIN`) VALUES
-(1, 1, '12:25:00', '16:30:00'),
-(2, 3, '14:00:00', '17:00:00'),
-(3, 4, '15:30:25', '18:25:00'),
-(4, 5, '10:00:00', '15:00:00'),
-(5, 2, '15:00:00', '18:00:00'),
-(6, 6, '08:00:00', '12:00:00');
+INSERT INTO `HORAIRE` (`IDACTIVITE`, `IDSESSION`, `HEUREDEBUT`, `HEUREFIN`, `JOURACTIVITE`) VALUES
+(1, 1, '12:25:00', '16:30:00', 2),
+(2, 3, '14:00:00', '17:00:00', 1),
+(3, 4, '15:30:25', '18:25:00', 1),
+(4, 5, '10:00:00', '15:00:00', 3),
+(5, 2, '15:00:00', '18:00:00', 1),
+(6, 6, '08:00:00', '12:00:00', 1);
 
 
 # -----------------------------------------------------------------------------
