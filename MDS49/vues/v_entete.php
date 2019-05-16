@@ -5,7 +5,7 @@
 <head>
 <title>Maison départementale des Sports 49</title>
 <meta http-equiv="Content-Language" content="fr">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8 with BOM">
 <link href="util/style.css" rel="stylesheet" type="text/css">
 </head>
 <body >

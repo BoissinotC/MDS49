@@ -1,28 +1,39 @@
 <nav>
     <ul>
-        <li class="accueil"><a href="accueil.html">Accueil</a>
+        <li class="accueil"><a href="index.php">Accueil</a>
         </li>
-        <li class="information"><a href="information.html">Information</a>
+        <li class="information"><a>Information</a>
         <ul class="submenu">
-            <li><a href="#">Hébergements</a></li>
-            <li><a href="#">Intervenants</a></li>
-            <li><a href="#">Animateurs</a></li>
-            <li><a href="#">Bénévoles</a></li>
-            <li><a href="#">Stages</a></li>
+            <li><a href="index.php?uc=information&action=hebergements">Hébergements</a></li>
+            <li><a href="index.php?uc=information&action=intervenants">Intervenants</a></li>
+            <li><a href="index.php?uc=information&action=animateurs">Animateurs</a></li>
+            <li><a href="index.php?uc=information&action=benevoles">Bénévoles</a></li>
+            <li><a href="index.php?uc=information&action=stage">Stages</a></li>
+            <li><a href="index.php?uc=information&action=session">Planning</a></li>
         </ul>
         </li>
-        <li class="gestion"><a href="gestion.html">Gestion</a>
+        <?php if(!isset($_SESSION["TYPECOMPTE"]) || ($_SESSION["TYPECOMPTE"]) != "ADMIN" )
+        { header("Location : http://gr03.sio-cholet.fr/index.php");} else { ?>
+        <li class="gestion"><a>Gestion</a>
         <ul class="submenu">
-            <li><a href="#">Lieux d'hébergements</a></li>
-            <li><a href="#">Inervenants</a></li>
-            <li><a href="#">Animateurs</a></li>
-            <li><a href="#">Bénévoles</a></li>
-            <li><a href="#">Évaluation du Stagiaire</a></li>
-            <li><a href="#">Gestion Stages</a></li>
-            <li><a href="#">Gestion Planning</a></li>
+            <li><a href="index.php?uc=lieux&action=voirLieux">Lieux d'hébergements</a></li>
+            <li><a href="index.php?uc=gestion&action=affecterIntervenant">Intervenants</a></li>
+            <li><a href="index.php?uc=gestion&action=affecterAnimateur">Animateurs</a></li>
+            <li><a href="index.php?uc=gestion&action=affecterBenevole">Bénévoles</a></li>
+            <li><a href="index.php?uc=gestion&action=choixInscrit">Évaluation du Stagiaire</a></li>
         </ul>
         </li>
-        <li class="stage"><a href="stage.html">Stage</a></li> 
-        <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li>     
+        <?php } ?> 
+        <?php if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)
+        { ?>
+            <li class="identification"><a href="index.php?uc=identifier&action=seConnecter">S'identifier</a></li> <?php 
+        } 
+        else 
+        { ?>
+
+            <li class="stage"><a href="index.php?uc=stage&action=demandeStage">Stage</a></li> 
+            <li class="identification"><a href="index.php?uc=identifier&action=seDeconnecter">Deconnexion</a></li>
+        <?php } ?>
+
         </ul>
 </nav>

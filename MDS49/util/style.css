@@ -58,6 +58,7 @@ nav li:hover .submenu {
 
 .submenu li {
     border-bottom: 1px solid #CCC;
+    background-color: #f1f1f1;
 }
 
 .submenu li a {
